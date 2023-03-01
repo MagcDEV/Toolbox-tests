@@ -1,8 +1,7 @@
 const http = require("http");
 
-const getFileList = (options, data) => {
+const getFileList = (options, data = "", equal = false, fileName = undefined) => {
   return new Promise((resolve, reject) => {
-
     const request = http.request(options, (response) => {
       // Set the encoding, so we don't get log to the console a bunch of gibberish binary data
       response.setEncoding("utf8");
@@ -14,7 +13,15 @@ const getFileList = (options, data) => {
 
       // The whole response has been received. Print out the result.
       response.on("end", () => {
-        resolve(JSON.parse(data).files);
+        if (equal) {
+          resolve(JSON.parse(data));
+        } else {
+          if (fileName) {
+            resolve(JSON.parse(data).files.filter((file) => file === fileName));
+          } else {
+            resolve(JSON.parse(data).files);
+          }
+        }
         // const fileNames = JSON.parse(data).files;
         // return fileNames;
         //   res.send(data);

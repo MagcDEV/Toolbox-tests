@@ -10,7 +10,7 @@ const port = 3000;
 
 const options = {
   hostname: "echo-serv.tbxnet.com",
-  path: "/v1/secret/files", // we changed the path to only grab one post
+  path: "/v1/secret/files",
   method: "GET",
   headers: {
     "Content-Type": "application/json",
@@ -18,25 +18,51 @@ const options = {
   },
 };
 
+app.get("/files/list", (req, res) => {
+  (async () => {
+    try {
+      const fileList = await getFileList(options, "", true);
+      return res
+        .set({
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        })
+        .send(JSON.stringify(fileList));
+    } catch (error) {
+      console.log(error);
+    }
+  })();
+});
+
 app.get("/files/data", (req, res) => {
   (async () => {
     try {
-      let data = "";
-      const fileList = await getFileList(options, data);
+      console.log(req.query.fileName);
+      const fileList = await getFileList(options, "", false, req.query.fileName);
 
       const urls = getFileURLS(
         fileList,
         "https://echo-serv.tbxnet.com/v1/secret/file/"
       );
+      console.log("list of files fectched");
+
       const requests = createDownloadRequests(urls);
 
       const value = await Promise.all(requests);
+
+      console.log("all files dowloaded");
 
       const validFileList = await getValidFiles(value);
 
       const respuesta = createResponse(validFileList);
 
-      return res.send(respuesta);
+
+      return res
+        .set({
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        })
+        .send(JSON.stringify(respuesta));
     } catch (err) {
       console.log(err);
     }

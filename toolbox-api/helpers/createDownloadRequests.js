@@ -1,4 +1,5 @@
 const { download } = require("./download");
+const fs = require("fs");
 
 const createDownloadRequests = (urls) => {
   const requests = [];
@@ -6,7 +7,9 @@ const createDownloadRequests = (urls) => {
     let urlObj = new URL(url);
     let parts = urlObj.pathname.split("/");
     let filename = parts[parts.length - 1];
-    requests.push(download(url, `files/${filename}`));
+    if (!fs.existsSync(`./files/${filename}`)) {
+      requests.push(download(url, `files/${filename}`));
+    }
   }
   return requests;
 };
