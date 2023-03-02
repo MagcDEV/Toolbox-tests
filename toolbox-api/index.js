@@ -7,6 +7,7 @@ const fs = require("fs");
 const { createResponse } = require("./helpers/createResponse");
 const { getValidFiles } = require("./helpers/getValidFiles");
 const { deleteFiles } = require("./helpers/deleteFiles");
+const { csvToJsonCustom } = require("./helpers/csvToJsonCustom");
 const port = 3000;
 
 const options = {
@@ -38,6 +39,7 @@ app.get("/files/list", (req, res) => {
 app.get("/files/data", (req, res) => {
   (async () => {
     try {
+      // console.log(csvToJsonCustom('files/test3.csv'))
       const fileList = await getFileList(
         options,
         "",
@@ -66,6 +68,7 @@ app.get("/files/data", (req, res) => {
           "Access-Control-Allow-Origin": "*",
         })
         .send(JSON.stringify(respuesta));
+      // res.send('hello')
     } catch (err) {
       console.log(err);
     }

@@ -1,10 +1,11 @@
-const csvToJson = require("convert-csv-to-json");
+const { csvToJsonCustom } = require("./csvToJsonCustom");
 
 const getLines = (filePath) => {
-  let objectArray = csvToJson
-    .formatValueByType()
-    .fieldDelimiter(",")
-    .getJsonFromCsv(filePath);
+  // let objectArray = csvToJson
+  //   .formatValueByType()
+  //   .fieldDelimiter(",")
+  //   .getJsonFromCsv(filePath);
+  let objectArray = csvToJsonCustom(filePath);
 
   let result = objectArray.filter((objeto) => {
     delete objeto.file;
@@ -14,7 +15,12 @@ const getLines = (filePath) => {
       arrayCheck.push(objeto[element]);
     });
 
-    return !arrayCheck.includes("") && typeof arrayCheck[1] == "number";
+    return (
+      !arrayCheck.includes("") &&
+      typeof arrayCheck[1] == "number" &&
+      !arrayCheck.includes(NaN) &&
+      !arrayCheck.includes(undefined)
+    );
   });
 
   return result;
