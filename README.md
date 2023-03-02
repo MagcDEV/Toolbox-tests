@@ -5,7 +5,7 @@ El repo contiene dos carpetas (toolbox-api y toolbox-front) que corresponden a l
 
 Para correr la api hacer cd a toolbox-api, luego correr el npm install y para correr npm start, y estara escuchando por el puerto 3000. http://localhost:3000/
 
-Para correr las pruebas en la API se debe ejecutar el comando npm test.
+Para correr las pruebas en la API se debe ejecutar el comando npm test y la api debe estar corriendo.
 
 Para correr el Frontend cliente hacer cd a toolbox-front, luego correr el npm install y para correr npm run serve, y estara disponible en 3030. http://localhost:3030/
 
@@ -39,3 +39,4 @@ NOTA: adicional mente en la api se agrego un veficador de formato para aseguarse
 
 2. [x] Usar Redux Redux - A predictable state container for JavaScript apps. | https://redux.js.org/.
 3. [x] Poder filtrar por "fileName" usando el punto opcional del API de listado de archivos y filtro por queryparam.
+4. [x] Test unitarios usando Jest | https://jestjs.io/ *faltaron hacer mas test*.

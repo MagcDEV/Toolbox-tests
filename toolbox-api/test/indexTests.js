@@ -18,7 +18,7 @@ describe("get all the files: ", () => {
 
   it("should get the list of csv files", (done) => {
     chai
-      .request(url_list)
+      .request(url)
       .get("/files/list")
       .end(function (err, res) {
         expect(res).to.have.status(200);

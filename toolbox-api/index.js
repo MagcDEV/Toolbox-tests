@@ -45,23 +45,16 @@ app.get("/files/data", (req, res) => {
         req.query.fileName
       );
 
-
       const urls = getFileURLS(
         fileList,
         "https://echo-serv.tbxnet.com/v1/secret/file/"
       );
 
-
       const requests = createDownloadRequests(urls);
 
       const value = await Promise.all(requests);
 
-      console.log("all files dowloaded");
-
       const validFileList = await getValidFiles(value);
-
-      console.log("lista de archivos validos")
-      console.log(validFileList);
 
       const respuesta = createResponse(validFileList);
 

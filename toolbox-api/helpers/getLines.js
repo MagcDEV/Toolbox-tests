@@ -1,8 +1,6 @@
 const csvToJson = require("convert-csv-to-json");
 
 const getLines = (filePath) => {
-  console.log(filePath);
-  console.log("##################################################S")
   let objectArray = csvToJson
     .formatValueByType()
     .fieldDelimiter(",")
