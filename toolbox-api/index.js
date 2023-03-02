@@ -6,6 +6,7 @@ const { getFileURLS } = require("./helpers/getFileURLS");
 const fs = require("fs");
 const { createResponse } = require("./helpers/createResponse");
 const { getValidFiles } = require("./helpers/getValidFiles");
+const { deleteFiles } = require("./helpers/deleteFiles");
 const port = 3000;
 
 const options = {
@@ -37,14 +38,19 @@ app.get("/files/list", (req, res) => {
 app.get("/files/data", (req, res) => {
   (async () => {
     try {
-      console.log(req.query.fileName);
-      const fileList = await getFileList(options, "", false, req.query.fileName);
+      const fileList = await getFileList(
+        options,
+        "",
+        false,
+        req.query.fileName
+      );
+
 
       const urls = getFileURLS(
         fileList,
         "https://echo-serv.tbxnet.com/v1/secret/file/"
       );
-      console.log("list of files fectched");
+
 
       const requests = createDownloadRequests(urls);
 
@@ -54,9 +60,13 @@ app.get("/files/data", (req, res) => {
 
       const validFileList = await getValidFiles(value);
 
+      console.log("lista de archivos validos")
+      console.log(validFileList);
+
       const respuesta = createResponse(validFileList);
 
-
+      const deletedFile = await deleteFiles(validFileList);
+      
       return res
         .set({
           "Content-Type": "application/json",
