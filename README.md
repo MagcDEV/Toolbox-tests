@@ -9,6 +9,12 @@ Para correr las pruebas en la API se debe ejecutar el comando npm test y la api 
 
 Para correr el Frontend cliente hacer cd a toolbox-front, luego correr el npm install y para correr npm run serve, y estara disponible en 3030. http://localhost:3030/
 
+### Correr la app con Docker
+
+Se puede correr ambas aplicaciones (api y front) con docker seguiran en las mismas rutas http://localhost:3030/ para el front y http://localhost:3000/ para la api, hay que correr el comando docker-compose up.
+
+NOTA: se debe tener instalado y configurado docker y docker-compose en el equipo donde se quiera usar el comando docker-compose up.  
+
 Para correr las pruebas en el Front se debe ejecutar el comando npm test.
 
 NOTA: para que el front funcione la api tiene que estar corriendo.
@@ -27,8 +33,6 @@ NOTA: para que el front funcione la api tiene que estar corriendo.
 5. [x] Un endpoint GET /files/list que dé como respuesta la lista de archivos disponibles tal cual como se la muestra en el API Externa.
 6. [x] Agregar un filtro por queryparam para poder pedir los datos de un archivo especifico: /files/data?fileName=Nombre del archivo.
 
-NOTA: adicional mente en la api se agrego un veficador de formato para aseguarse de que los campos de los archivos csv tuvieran el formato correcto de no ser el caso se omite la linea, si un archivo esta vacio o se omitieron todas sus linieas el archivo nose muestra.
-
 ## Objetivos Logrados Front
 
 ### 2) Front
@@ -40,3 +44,7 @@ NOTA: adicional mente en la api se agrego un veficador de formato para aseguarse
 2. [x] Usar Redux Redux - A predictable state container for JavaScript apps. | https://redux.js.org/.
 3. [x] Poder filtrar por "fileName" usando el punto opcional del API de listado de archivos y filtro por queryparam.
 4. [x] Test unitarios usando Jest | https://jestjs.io/ *faltaron hacer mas test*.
+
+## Objetivos Logrados GLOBAL
+
+1. [x] Usar Docker o Docker Compose para correr las apps.
