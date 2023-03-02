@@ -40,7 +40,6 @@ build/Release
 
 # Dependency directories
 node_modules/
-files/
 jspm_packages/
 
 # Snowpack dependency directory (https://snowpack.dev/)
@@ -69,6 +68,9 @@ web_modules/
 
 # Output of 'npm pack'
 *.tgz
+
+# csv files
+*.csv
 
 # Yarn Integrity file
 .yarn-integrity
